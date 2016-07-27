@@ -1,2 +1,6 @@
 alma
+<<<<<<< HEAD
 korte
+=======
+citrom
+>>>>>>> 1ae3a9a60cd5b4f78a2b94afa912f77b928e6d42
