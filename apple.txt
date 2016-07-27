@@ -1,4 +1,9 @@
 alma
 citrom
 krumpli ultetveny
+almasretes
+korte
+majomkenyérfa-gyümölcs
+krumpli
+This is the test of the super merging thingy
 narancs
