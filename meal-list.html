@@ -1,0 +1,47 @@
+<link rel="import" href="components/polymer/polymer.html">
+
+<!--
+`meal-list`
+Listing the elements
+
+@demo demo/index.html 
+-->
+
+<dom-module id="meal-list">
+    <template>
+      <template is="dom-repeat" items="{{meals}}">
+        <style>
+          :host {
+            display: block;
+          }
+        </style>
+        <div data-id$='{{item.id}}'>
+          <span>{{item.text}}</span>
+          <span>{{item.calories}}</span>
+          <span>{{item.date}}</span>
+        </div>
+      </template>
+    </template>
+
+  <script>
+    Polymer({
+
+      is: 'meal-list',
+      
+      ready: function() {
+        this.meals = [
+          {id: 13, text: 'Krumpli', calories: 300, date: '2016-01-01'},
+          {id: 14, text: 'Kacsa', calories: 400, date: '2016-02-02'},
+        ];
+      },
+      
+      properties: {
+        items: {
+          type: Array,
+          notify: true
+        }
+      }
+    });
+  </script>
+</dom-module>
+<!-- data-smth -> dataId -> dataid -->
