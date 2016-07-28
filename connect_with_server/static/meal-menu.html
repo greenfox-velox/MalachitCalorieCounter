@@ -1,0 +1,31 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/paper-menu/paper-menu.html">
+
+<dom-module id='meal-menu'>
+  <template>
+    <style>
+      :host {
+        display: block;
+        color: red;
+      }
+      .iron-selected {
+        background: red;
+        color: blue;
+      }
+    </style>
+    <div>
+      <iron-flex-layout>
+        <paper-menu>
+          <paper-item>Cucc</paper-item>
+          <paper-item>Mucc</paper-item>
+        </paper-menu>
+      </iron-flex-layout>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'meal-menu',
+    })
+  </script>
+</dom-module>
