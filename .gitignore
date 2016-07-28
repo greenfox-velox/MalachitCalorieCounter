@@ -1,7 +1,5 @@
 .gitignore
 bower_components/
-demo
-test
 node_modules
 .tmp
 .publish/
