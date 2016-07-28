@@ -6,7 +6,7 @@
 `meal-list`
 Listing the elements
 
-@demo demo/index.html 
+@demo demo/index.html
 -->
 
 <dom-module id="meal-list">
@@ -30,14 +30,14 @@ Listing the elements
     Polymer({
 
       is: 'meal-list',
-      
+
       ready: function() {
         this.meals = [
           {id: 13, text: 'Krumpli', calories: 300, date: '2016-01-01'},
           {id: 14, text: 'Kacsa', calories: 400, date: '2016-02-02'},
         ];
       },
-      
+
       properties: {
         items: {
           type: Array,
