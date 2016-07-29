@@ -1,0 +1,49 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="contact-listing.html">
+
+<dom-module id="contact-list">
+  <style>
+    ul {
+      list-style: none;
+    }
+    li + li {
+      border-top: solid 1px black;
+    }
+  </style>
+  
+  <template>
+    <ul>
+      <template is="dom-repeat" items="{{contacts}}">
+        <li>
+          <contact-listing full-name="{{item.name}}" current-email="{{item.email}}" user-img="{{item.img}}"></contact-listing>
+        </li>
+      </template>
+    </ul>
+  </template>
+
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'contact-list',
+    
+    ready: function() {
+      this.contacts = [
+        {
+          name: 'Scott', 
+          email: 'scott@maki.hu', 
+          img:"https://randomuser.me/api/portraits/thumb/men/15.jpg"
+        }, {
+          name: 'Tim', 
+          email: 'tim@maki.hu', 
+          img:"https://randomuser.me/api/portraits/thumb/men/20.jpg"
+        }, {
+          name: 'Ben', 
+          email: 'ben@maki.hu', 
+          img:"https://randomuser.me/api/portraits/thumb/men/25.jpg"
+        },
+      ]
+    },
+
+  });
+</script>
