@@ -1,0 +1,41 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/paper-item/paper-item.html">
+<link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="meal-list">
+    <template>
+      <iron-ajax
+        auto
+        url="http://localhost:3000/get"
+        headers='{"Accept": "application/json"}'
+        handle-as="json"
+        last-response= "{{foodlist}}">
+      </iron-ajax>
+      <template is="dom-repeat" items='{{foodlist}}'>
+        <style>
+          :host {
+            display: block;
+          }
+          paper-item {
+            width: 50%;
+            margin: 2px auto;
+            display: flex;
+            justify-content: space-between;
+          }
+        </style>
+        <paper-item data-id$='{{item.id}}'>
+          <span>{{item.text}}</span>
+          <span>{{item.calories}}</span>
+          <span>{{item.date}}</span>
+        </paper-item>
+      </template>
+    </template>
+
+  <script>
+    Polymer({
+
+      is: 'meal-list',
+
+    });
+  </script>
+</dom-module>

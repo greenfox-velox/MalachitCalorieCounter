@@ -1,5 +1,6 @@
-.gitignore
 bower_components/
 node_modules
 .tmp
 .publish/
+static/bower_components
+venv
