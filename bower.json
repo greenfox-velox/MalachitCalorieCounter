@@ -4,7 +4,8 @@
   "main": "meal-list.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0",
-    "paper-menu": "PolymerElements/paper-menu#^1.2.2"
+    "paper-menu": "PolymerElements/paper-menu#^1.2.2",
+    "paper-item": "PolymerElements/paper-item#^1.2.1"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

@@ -1,6 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="meal-menu.html">
-
+<link rel="import" href="../paper-item/paper-item.html">
 
 <!--
 `meal-list`
@@ -11,18 +11,23 @@ Listing the elements
 
 <dom-module id="meal-list">
     <template>
-      <meal-menu></meal-menu>
       <template is="dom-repeat" items="{{meals}}">
         <style>
           :host {
             display: block;
           }
+          paper-item {
+            width: 50%;
+            margin: 2px auto;
+            display: flex;
+            justify-content: space-between;
+          }
         </style>
-        <div data-id$='{{item.id}}'>
+        <paper-item data-id$='{{item.id}}'>
           <span>{{item.text}}</span>
           <span>{{item.calories}}</span>
           <span>{{item.date}}</span>
-        </div>
+        </paper-item>
       </template>
     </template>
 
