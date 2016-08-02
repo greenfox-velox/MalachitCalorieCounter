@@ -9,13 +9,14 @@
       <paper-button on-tap="_addMeal">Add test meal</paper-button>
       <iron-ajax
         auto="true"
+        content-type="application/json"
         url="{{url}}"
-        headers='{"Accept": "application/json"}'
-        handle-as="json"
-        last-response= "{{foodlist}}"
-        method='{{requestMethod}}'
-        body='{{requestBody}}'>
+        method="{{requestMethod}}"
+        last-response="{{foodlist}}"
+        body='{{requestBody}}'
+        >
       </iron-ajax>
+      
       <template is="dom-repeat" items='{{foodlist}}'>
         <style>
           :host {
@@ -51,9 +52,8 @@
           value: ''
         },
         requestBody: {
-          type: Object,
-          value: {},
-        }
+          type: String,
+        },
       },
       //Listing the whole list of meals by clicking on list button
       _listMeals: function() {
@@ -64,7 +64,7 @@
       _addMeal: function() {
         this.url = 'http://localhost:3000/list';
         this.requestMethod = 'POST';
-        this.requestBody = {id: 'test', text: 'Test meal', calories: '100', date: '2016-01-01'};
+        this.requestBody = {id: 'test', text: 'TEST MEAL', calories: 100, date: '2016-01-01'};
       },
 
     });
