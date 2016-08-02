@@ -1,5 +1,8 @@
 <link rel="import" href="bower_components/polymer/polymer.html">
 <link rel="import" href="bower_components/paper-item/paper-item.html">
+<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
 <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="meal-list">
@@ -11,6 +14,7 @@
         handle-as="json"
         last-response= "{{foodlist}}">
       </iron-ajax>
+      <paper-input label="Add new meal" no-label-float></paper-input>
       <template is="dom-repeat" items='{{foodlist}}'>
         <style>
           :host {
@@ -21,12 +25,26 @@
             margin: 2px auto;
             display: flex;
             justify-content: space-between;
+            padding: 10px 20px;
+            --paper-item-min-height: 70px;
+            --paper-item-selected-weight: bolder;
+          }
+          paper-input {
+            margin: auto;
+            width: 50%;
+          }
+          paper-icon-button.deleteIcon {
+            --paper-icon-button-ink-color: var(--paper-blue-700);
+          }
+          paper-icon-button.deleteIcon:hover {
+            color: var(--paper-pink-300);
           }
         </style>
         <paper-item data-id$='{{item.id}}'>
           <span>{{item.text}}</span>
           <span>{{item.calories}}</span>
           <span>{{item.date}}</span>
+          <paper-icon-button icon="delete" class="deleteIcon"></paper-icon-button>
         </paper-item>
       </template>
     </template>
