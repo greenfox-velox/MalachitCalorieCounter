@@ -6,13 +6,15 @@
 <dom-module id="meal-list">
     <template>
       <paper-button on-tap="_listMeals">List Meals</paper-button>
+      <paper-button on-tap="_addMeal">Add test meal</paper-button>
       <iron-ajax
-        auto
+        auto="true"
         url="{{url}}"
         headers='{"Accept": "application/json"}'
         handle-as="json"
         last-response= "{{foodlist}}"
-        method='{{requestMethod}}'>
+        method='{{requestMethod}}'
+        body='{{requestBody}}'>
       </iron-ajax>
       <template is="dom-repeat" items='{{foodlist}}'>
         <style>
@@ -47,12 +49,22 @@
         url: {
           type: String,
           value: ''
+        },
+        requestBody: {
+          type: Object,
+          value: {},
         }
       },
-      
+      //Listing the whole list of meals by clicking on list button
       _listMeals: function() {
-        this.url = 'http://localhost:3000/list'
+        this.url = 'http://localhost:3000/list';
         this.requestMethod = 'GET';
+      },
+      // Adding a new test meal by clicking on add button
+      _addMeal: function() {
+        this.url = 'http://localhost:3000/list';
+        this.requestMethod = 'POST';
+        this.requestBody = {id: 'test', text: 'Test meal', calories: '100', date: '2016-01-01'};
       },
 
     });
