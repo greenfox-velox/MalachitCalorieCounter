@@ -1,17 +1,32 @@
 from flask import Flask, render_template, jsonify
+from flask_mysqldb import MySQL
+
 app = Flask(__name__)
-
-
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'almafa'
+app.config['MYSQL_DB'] = 'FoodCalories'
+mysql = MySQL(app)
 
 @app.route("/")
 def index():
     return render_template('index.html')
 
 @app.route("/get")
-def get_all_food():
-    return jsonify([{'id': 13, 'text': 'Krumpli', 'calories': 300, 'date': '2016-01-01'},
-    {'id': 14, 'text': 'Kacsa', 'calories': 400, 'date': '2016-02-02'},
-    {'id': 15, 'text': 'Beka', 'calories': 200, 'date': '2016-08-01'}])
+def foods():
+    list_w_key = []
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM Foods')
+    rv = cur.fetchall()
+    for item in rv:
+        i = {
+            'id':item[0],
+            'name':item[1],
+            'calories':item[2],
+            'date':item[3]
+        }
+        list_w_key.append(i)
+    return jsonify(list_w_key)
+
 
 if __name__ == "__main__":
-    app.run(debug=True, host='localhost', port=3000)
+    app.run(debug=True, host='localhost')
