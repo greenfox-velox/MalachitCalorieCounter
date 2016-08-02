@@ -13,8 +13,7 @@
         url="{{url}}"
         method="{{requestMethod}}"
         last-response="{{foodlist}}"
-        body='{{requestBody}}'
-        >
+        body='{{requestBody}}'>
       </iron-ajax>
       
       <template is="dom-repeat" items='{{foodlist}}'>
@@ -43,6 +42,28 @@
       is: 'meal-list',
       
       properties: {
+        // These are the properties containing the input field's values
+        idInput: {
+          type: Number,
+          notify: true,
+          value: 100
+        },
+        textInput: {
+          type: String,
+          notify: true,
+          value: 'Test'
+        },
+        calorieInput: {
+          type: Number,
+          notify: true,
+          value: 100
+        },
+        dateInput: {
+          type: String,
+          notify: true,
+          value: '2016-07-07'
+        },
+        // These are the request related properties, giving the attributes of the iron-ajax component
         requestMethod: {
           type: String,
           value: ''
@@ -53,19 +74,29 @@
         },
         requestBody: {
           type: String,
+          computed: '_createData(idInput, textInput, calorieInput, dateInput)'
         },
       },
+
       //Listing the whole list of meals by clicking on list button
       _listMeals: function() {
+        this.requestMethod = '';
         this.url = 'http://localhost:3000/list';
         this.requestMethod = 'GET';
       },
+
       // Adding a new test meal by clicking on add button
       _addMeal: function() {
+        this.requestMethod = '';
         this.url = 'http://localhost:3000/list';
         this.requestMethod = 'POST';
-        this.requestBody = {id: 'test', text: 'TEST MEAL', calories: 100, date: '2016-01-01'};
+        // Here comes the unput from the input fields
+        
       },
+      // Creating request data out of input field values
+      _createData: function(idInput, textInput, calorieInput, dateInput) {
+        return {id: idInput, text: textInput, calories: calorieInput, date: dateInput};
+      }
 
     });
   </script>
