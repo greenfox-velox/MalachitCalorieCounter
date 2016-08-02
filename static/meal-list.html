@@ -3,6 +3,7 @@
 <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
 <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="meal-list">
@@ -14,7 +15,12 @@
         handle-as="json"
         last-response= "{{foodlist}}">
       </iron-ajax>
-      <paper-input label="Add new meal" no-label-float></paper-input>
+      <div class=inputMeal>
+        <paper-input label="Meal"></paper-input>
+        <paper-input label="Calorie" type="number"></paper-input>
+        <paper-input label="Date" type="date"></paper-input>
+      </div>
+      <paper-button raised class="addButton">Add new meal</paper-button>
       <template is="dom-repeat" items='{{foodlist}}'>
         <style>
           :host {
@@ -22,22 +28,33 @@
           }
           paper-item {
             width: 50%;
-            margin: 2px auto;
+            margin: 10px auto;
             display: flex;
             justify-content: space-between;
-            padding: 10px 20px;
-            --paper-item-min-height: 70px;
-            --paper-item-selected-weight: bolder;
+            --paper-item-min-height: 40px;
+          }
+          .inputMeal {
+            margin: 10px;
           }
           paper-input {
             margin: auto;
             width: 50%;
           }
+          paper-button.addButton {
+            --paper-button-ink-color: var(--paper-grey-200);
+            display: flex;
+            width: 200px;
+            margin: auto;
+          }
+          paper-button.addButton:hover {
+            background-color: var(--paper-pink-300);
+            color: white;
+          }
           paper-icon-button.deleteIcon {
             --paper-icon-button-ink-color: var(--paper-blue-700);
           }
           paper-icon-button.deleteIcon:hover {
-            color: var(--paper-pink-300);
+            color: var(--paper-pink-500);
           }
         </style>
         <paper-item data-id$='{{item.id}}'>
