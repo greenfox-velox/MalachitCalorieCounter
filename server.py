@@ -7,7 +7,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route("/get")
+@app.route("/list", methods=['GET'])
 def get_all_food():
     return jsonify([{'id': 13, 'text': 'Krumpli', 'calories': 300, 'date': '2016-01-01'},
     {'id': 14, 'text': 'Kacsa', 'calories': 400, 'date': '2016-02-02'},

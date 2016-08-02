@@ -1,15 +1,18 @@
 <link rel="import" href="bower_components/polymer/polymer.html">
 <link rel="import" href="bower_components/paper-item/paper-item.html">
 <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
 
 <dom-module id="meal-list">
     <template>
+      <paper-button on-tap="_listMeals">List Meals</paper-button>
       <iron-ajax
         auto
-        url="http://localhost:3000/get"
+        url="{{url}}"
         headers='{"Accept": "application/json"}'
         handle-as="json"
-        last-response= "{{foodlist}}">
+        last-response= "{{foodlist}}"
+        method='{{requestMethod}}'>
       </iron-ajax>
       <template is="dom-repeat" items='{{foodlist}}'>
         <style>
@@ -35,6 +38,22 @@
     Polymer({
 
       is: 'meal-list',
+      
+      properties: {
+        requestMethod: {
+          type: String,
+          value: ''
+        },
+        url: {
+          type: String,
+          value: ''
+        }
+      },
+      
+      _listMeals: function() {
+        this.url = 'http://localhost:3000/list'
+        this.requestMethod = 'GET';
+      },
 
     });
   </script>
