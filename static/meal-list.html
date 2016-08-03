@@ -6,7 +6,7 @@
     <template>
       <iron-ajax
         auto
-        url="http://localhost:3000/get"
+        url="http://localhost:3000/list"
         headers='{"Accept": "application/json"}'
         handle-as="json"
         last-response= "{{foodlist}}">
@@ -33,9 +33,7 @@
 
   <script>
     Polymer({
-
       is: 'meal-list',
-
     });
   </script>
 </dom-module>
