@@ -2,69 +2,68 @@
 <link rel="import" href="bower_components/paper-item/paper-item.html">
 <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="bower_components/paper-input/paper-input.html">
 <link rel="import" href="bower_components/paper-button/paper-button.html">
 <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="input-fields.html">
+
 
 <dom-module id="meal-list">
-    <template>
-      <iron-ajax
-        auto
-        url="http://localhost:3000/get"
-        headers='{"Accept": "application/json"}'
-        handle-as="json"
-        last-response= "{{foodlist}}">
-      </iron-ajax>
-      <div class=inputMeal>
-        <paper-input label="Meal"></paper-input>
-        <paper-input label="Calorie" type="number"></paper-input>
-        <paper-input label="Date" type="date"></paper-input>
-      </div>
+  <template>
+    <iron-ajax
+      auto
+      url="http://localhost:3000/get"
+      headers='{"Accept": "application/json"}'
+      handle-as="json"
+      last-response= "{{foodlist}}">
+    </iron-ajax>
+    <input-fields></input-fields>
+    <div class="buttons">
       <paper-button raised class="addButton">Add new meal</paper-button>
-      <template is="dom-repeat" items='{{foodlist}}'>
-        <style>
-          :host {
-            display: block;
-          }
-          paper-item {
-            width: 50%;
-            margin: 10px auto;
-            display: flex;
-            justify-content: space-between;
-            --paper-item-min-height: 40px;
-          }
-          .inputMeal {
-            margin: 10px;
-          }
-          paper-input {
-            margin: auto;
-            width: 50%;
-          }
-          paper-button.addButton {
-            --paper-button-ink-color: var(--paper-grey-200);
-            display: flex;
-            width: 200px;
-            margin: auto;
-          }
-          paper-button.addButton:hover {
-            background-color: var(--paper-pink-300);
-            color: white;
-          }
-          paper-icon-button.deleteIcon {
-            --paper-icon-button-ink-color: var(--paper-blue-700);
-          }
-          paper-icon-button.deleteIcon:hover {
-            color: var(--paper-pink-500);
-          }
-        </style>
-        <paper-item data-id$='{{item.id}}'>
-          <span>{{item.text}}</span>
-          <span>{{item.calories}}</span>
-          <span>{{item.date}}</span>
-          <paper-icon-button icon="delete" class="deleteIcon"></paper-icon-button>
-        </paper-item>
-      </template>
+      <paper-button raised class="filterButton">Filter</paper-button>
+      <paper-button raised class="showAllButton">Show all</paper-button>
+    </div>
+    <template is="dom-repeat" items='{{foodlist}}'>
+      <style>
+        :host {
+          display: block;
+        }
+        paper-item {
+          width: 50%;
+          margin: 10px auto;
+          display: flex;
+          justify-content: space-between;
+          --paper-item-min-height: 40px;
+        }
+        .buttons {
+          display: flex;
+          width: 50%;
+          margin: 20px auto;
+        }
+        paper-button {
+          --paper-button-ink-color: var(--paper-grey-200);
+          display: flex;
+          width: 200px;
+          margin: auto;
+        }
+        paper-button:hover {
+          background-color: var(--paper-pink-300);
+          color: white;
+        }
+        paper-icon-button.deleteIcon {
+          --paper-icon-button-ink-color: var(--paper-blue-700);
+        }
+        paper-icon-button.deleteIcon:hover {
+          color: var(--paper-pink-500);
+        }
+      </style>
+      <paper-item data-id$='{{item.id}}'>
+        <span>{{item.text}}</span>
+        <span>{{item.calories}}</span>
+        <span>{{item.date}}</span>
+        <paper-icon-button icon="delete" class="deleteIcon"></paper-icon-button>
+      </paper-item>
     </template>
+  </template>
 
   <script>
     Polymer({

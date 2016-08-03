@@ -1,0 +1,31 @@
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+
+<dom-module id="input-fields">
+
+  <template>
+    <div class=inputMeal>
+      <paper-input label="Meal"></paper-input>
+      <paper-input label="Calorie" type="number"></paper-input>
+      <paper-input label="Date" type="date"></paper-input>
+    </div>
+  </template>
+
+  <style>
+    .inputMeal {
+      margin: 10px;
+    }
+    paper-input {
+      margin: auto;
+      width: 50%;
+    }
+  </style>
+
+  <script>
+    Polymer({
+
+      is: 'input-fields'
+
+    });
+  </script>
+
+</dom-module>
