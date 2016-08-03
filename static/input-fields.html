@@ -1,0 +1,65 @@
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+
+<dom-module id="input-fields">
+
+  <template>
+    <div class="inputMeal">
+      <paper-input label="Meal" value="{{mealObject.text}}"></paper-input>
+      <paper-input label="Calorie" value="{{mealObject.calories}}" type="number"></paper-input>
+      <paper-input label="Date" value="{{mealObject.date}}" type="date"></paper-input>
+    </div>
+  </template>
+
+  <style>
+    .inputMeal {
+      margin: 10px;
+    }
+    paper-input {
+      margin: auto;
+      width: 50%;
+    }
+  </style>
+
+  <script>
+    Polymer({
+
+      is: 'input-fields',
+
+      properties: {
+        // These are the properties containing the input field's values
+        // By using a separate component for the inputs there would be no need of them.
+        mealObject: {
+          type: Object,
+          notify: true,
+          value: {}
+          }
+        },
+
+        // formOutput: {
+        //   computed: '_makeJSON(this.meal)'
+        // },
+
+        // _makeJSON: function(object){
+        //   return JSON.stringify({text: object.text, calories: object.calories, date: object.date});
+        // }
+
+        // textInput: {
+        //   type: String,
+        //   notify: true,
+        //   value: 'Test'
+        // },
+        // calorieInput: {
+        //   type: Number,
+        //   notify: true,
+        //   value: 100
+        // },
+        // dateInput: {
+        //   type: String,
+        //   notify: true,
+        //   value: '2016-07-07'
+        // }
+      }
+    });
+  </script>
+
+</dom-module>
