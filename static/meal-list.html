@@ -1,146 +1,82 @@
 <link rel="import" href="bower_components/polymer/polymer.html">
 <link rel="import" href="bower_components/paper-item/paper-item.html">
-<link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="bower_components/paper-button/paper-button.html">
 <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
+<link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="input-fields.html">
+
 
 <dom-module id="meal-list">
-    <template>
-<!--This is for testing purposes only-->
-      <paper-button on-tap="_listMeals">List Meals</paper-button>
-      <paper-button on-tap="_addMeal">Add test meal</paper-button>
-      <paper-button on-tap="_filter">Filter</paper-button>
-<!--This should be integrated to the master version-->
-      <iron-ajax
-        auto="true"
-        content-type="application/json"
-        url="{{url}}"
-        method="{{requestMethod}}"
-        last-response="{{currentList}}"
-        body="{{requestBody}}"
-        params="{{filterParameter}}">
-      </iron-ajax>
-<!--This should be  changed to the custom style-->
-      <template is="dom-repeat" items='{{currentList}}'>
-        <style>
-          :host {
-            display: block;
-          }
-          paper-item {
-            width: 50%;
-            margin: 2px auto;
-            display: flex;
-            justify-content: space-between;
-          }
-        </style>
-        <custom-form text-value="{{textInput}}"></custom-form>
-        <paper-item data-id$='{{item.id}}'>
-<!--This should be a separate component-->
-<!--         <custom-list-item calories="{{item.calories}}"></custom-list-item>-->
-          <span>{{item.text}}</span>
-          <span>{{item.calories}}</span>
-          <span>{{item.date}}</span>
-          <paper-icon-button icon="delete" on-tap="_deleteMeal"></paper-icon-button>
-        </paper-item>
-      </template>
+  <template>
+    <iron-ajax
+      auto
+      url="http://localhost:3000/get"
+      headers='{"Accept": "application/json"}'
+      handle-as="json"
+      last-response= "{{foodlist}}">
+    </iron-ajax>
+    <input-fields form-output={{formValues}}></input-fields>
+    <h1>{{formValues}}</h1>
+    <div class="buttons">
+      <paper-button raised class="addButton">Add new meal</paper-button>
+      <paper-button raised class="filterButton">Filter</paper-button>
+      <paper-button raised class="showAllButton">Show all</paper-button>
+    </div>
+    <template is="dom-repeat" items='{{foodlist}}'>
+      <style>
+        :host {
+          display: block;
+        }
+        paper-item {
+          width: 50%;
+          margin: 10px auto;
+          display: flex;
+          justify-content: space-between;
+          --paper-item-min-height: 40px;
+        }
+        .buttons {
+          display: flex;
+          width: 50%;
+          margin: 20px auto;
+        }
+        paper-button {
+          --paper-button-ink-color: black;
+          display: flex;
+          width: 200px;
+          margin: auto;
+        }
+        paper-button:hover {
+          background-color: var(--paper-pink-300);
+          color: white;
+        }
+        paper-icon-button.deleteIcon {
+          --paper-icon-button-ink-color: var(--paper-blue-700);
+        }
+        paper-icon-button.deleteIcon:hover {
+          color: var(--paper-pink-500);
+        }
+      </style>
+
+      <paper-item data-id$='{{item.id}}'>
+        <span>{{item.text}}</span>
+        <span>{{item.calories}}</span>
+        <span>{{item.date}}</span>
+        <paper-icon-button icon="delete" class="deleteIcon"></paper-icon-button>
+      </paper-item>
+
     </template>
+  </template>
 
   <script>
     Polymer({
-
       is: 'meal-list',
       
-      properties: {
-        // These are the properties containing the input field's values
-        // By using a separate component for the inputs there would be no need of them.
-        idInput: {
-          type: Number,
-          notify: true,
-          value: 100
-        },
-        textInput: {
-          type: String,
-          notify: true,
-          value: 'Test'
-        },
-        calorieInput: {
-          type: Number,
-          notify: true,
-          value: 100
-        },
-        dateInput: {
-          type: String,
-          notify: true,
-          value: '2016-07-07'
-        },
-        // These are the request related properties, giving the attributes of the iron-ajax component
-        currentList: {
-          type: Array,
-        },
-        requestMethod: {
-          type: String,
-          value: ''
-        },
-        url: {
-          type: String,
-          value: ''
-        },
-        requestBody: {
-          type: String,
-          computed: '_createData(idInput, textInput, calorieInput, dateInput)'
-        },
-        filterParameter: {
-          type: String,
-          value: '',
-        }
-//        filterParameter: {
-//          type: String,
-//          computed: '_filter(dateInput)'
-//        }
-      },
-
-      //Listing the whole list of meals by clicking on list button
-      _listMeals: function() {
-        // This is for firing the iron-ajax sending again
-        this.requestMethod = ''; 
-        this.url = 'http://localhost:3000/list';
-        this.requestMethod = 'GET';
-      },
-
-      // Adding a new test meal by clicking on add button
-      _addMeal: function() {
-        this.requestMethod = '';
-        this.url = 'http://localhost:3000/list';
-        this.requestMethod = 'POST';
-        // Here comes the input from the input fields, which has now some def values
-        // Would be much easier if we would use a new custom component
-        
-      },
-      // Creating request data out of input field values
-      _createData: function(idInput, textInput, calorieInput, dateInput) {
-        return {id: idInput, text: textInput, calories: calorieInput, date: dateInput};
-      },
-      // Deleting the item using the ID
-      _deleteMeal: function(e) {
-        this.splice('currentList', e.model.index, 1);
-//        this.idInput = e.target.parentElement.parentElement.getAttribute('data-id');
-      },
-      // This is obviously not the final form, it is only for showcase and for proving logic
-      _filter: function() {
-        this.requestMethod = '';
-        this.requestMethod ='GET';
-        this.url = '';
-        this.filterParameter = '';
-        this.url = 'http://localhost:3000/filter';
-        this.filterParameter = {date: this.dateInput}
+      formValues: {
+        type: Object,
+        notify: true,
+        value: {},
       }
-      // Filtering by sending ID as URL query parameter
-//      _filter: function(dateInput) {
-//        this.url = 'http://localhost:3000/filter';
-//        return JSON.stringify({id: dateInput});
-//      }
-
     });
   </script>
 </dom-module>

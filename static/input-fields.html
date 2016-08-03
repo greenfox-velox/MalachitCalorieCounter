@@ -1,0 +1,47 @@
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+
+
+<dom-module id="input-fields">
+
+  <template>
+   <button>lol</button>
+    <paper-icon-button icon='delete' on-tap='_logForm'></paper-icon-button>
+    <div class=inputMeal>
+      <paper-input label="Meal" value={{formOutput.text}}></paper-input>
+      <paper-input label="Calorie" type="number" value={{formOutput.calories}}></paper-input>
+      <paper-input label="Date" type="date" value={{formOutput.date}}></paper-input>
+    </div>
+  </template>
+
+  <style>
+    .inputMeal {
+      margin: 10px;
+    }
+    paper-input {
+      margin: auto;
+      width: 50%;
+    }
+  </style>
+
+  <script>
+    Polymer({
+      is: 'input-fields',
+      
+      properties: {
+        formOutput: {
+          type: Object,
+          notify: true,
+          value: {}
+        },
+      },
+      
+      _logForm: function() {
+        console.log(this.formOutput);
+      }
+    });
+  </script>
+
+</dom-module>
