@@ -34,8 +34,10 @@
             justify-content: space-between;
           }
         </style>
+        <custom-form text-value="{{textInput}}"></custom-form>
         <paper-item data-id$='{{item.id}}'>
 <!--This should be a separate component-->
+<!--         <custom-list-item calories="{{item.calories}}"></custom-list-item>-->
           <span>{{item.text}}</span>
           <span>{{item.calories}}</span>
           <span>{{item.date}}</span>
