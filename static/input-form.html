@@ -1,0 +1,47 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
+
+<dom-module id="input-form">
+  <template>
+    <style>
+    .inputMeal {
+      margin: 10px;
+    }
+    paper-input {
+      margin: auto;
+      width: 50%;
+    }
+    h3 {
+      height: 50px;
+      background-color: aqua;
+    }
+  </style>
+   
+    <div class="inputMeal">
+      <paper-input label="Meal" value="{{formValues.text}}"></paper-input>
+      <paper-input label="Calorie" value="{{formValues.calories}}" type="number"></paper-input>
+      <paper-input label="Date" value="{{formValues.date}}" type="date"></paper-input>
+    </div>
+    
+  </template>
+
+  <script>
+    Polymer({
+      is: 'input-form',
+      
+      properties: {
+        formValues : {
+          type: Object,
+          notify: true,
+          value: {
+            id: 'test',
+            text: '',
+            calories: '',
+            date: '',
+          },
+        },
+      },
+    });
+  </script>
+</dom-module>

@@ -1,13 +1,17 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
 <link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
 
 <dom-module id="input-fields">
 
   <template>
     <div class="inputMeal">
+      <paper-button raised on-tap="_debug" class="showAllButton">Debug</paper-button>
       <paper-input label="Meal" value="{{mealObject.text}}"></paper-input>
       <paper-input label="Calorie" value="{{mealObject.calories}}" type="number"></paper-input>
       <paper-input label="Date" value="{{mealObject.date}}" type="date"></paper-input>
     </div>
+    <h3>{{mealObject.text}}</h3>
   </template>
 
   <style>
@@ -18,6 +22,10 @@
       margin: auto;
       width: 50%;
     }
+    h3 {
+      height: 50px;
+      background-color: aqua;
+    }
   </style>
 
   <script>
@@ -26,39 +34,12 @@
       is: 'input-fields',
 
       properties: {
-        // These are the properties containing the input field's values
-        // By using a separate component for the inputs there would be no need of them.
         mealObject: {
           type: Object,
           notify: true,
-          value: {}
-          }
-        },
-
-        // formOutput: {
-        //   computed: '_makeJSON(this.meal)'
-        // },
-
-        // _makeJSON: function(object){
-        //   return JSON.stringify({text: object.text, calories: object.calories, date: object.date});
-        // }
-
-        // textInput: {
-        //   type: String,
-        //   notify: true,
-        //   value: 'Test'
-        // },
-        // calorieInput: {
-        //   type: Number,
-        //   notify: true,
-        //   value: 100
-        // },
-        // dateInput: {
-        //   type: String,
-        //   notify: true,
-        //   value: '2016-07-07'
-        // }
-      }
+          value: {},
+        }
+      },
     });
   </script>
 
