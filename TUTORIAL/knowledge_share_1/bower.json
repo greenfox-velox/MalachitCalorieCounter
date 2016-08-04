@@ -1,0 +1,17 @@
+{
+  "name": "knowledge_share_1",
+  "homepage": "https://github.com/greenfox-velox/MalachitCalorieCounter",
+  "authors": [
+    "Robert Czinege <czinege.robert@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
