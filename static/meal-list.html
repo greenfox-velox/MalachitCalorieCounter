@@ -73,22 +73,22 @@
         <span>{{item.date}}</span>
         <paper-icon-button icon="delete" class="deleteIcon" on-tap="_deleteMeal"></paper-icon-button>
       </paper-item>
-
     </template>
   </template>
 
   <script>
     Polymer({
+
       is: 'meal-list',
 
       properties: {
         formValues: Object,
-        
+
         currentList: {
           type: Array,
         }
       },
-      
+
       //Listing the whole list of meals by clicking on list button
       _listMeals: function() {
         this.$.ajax.method = 'GET';
@@ -102,7 +102,6 @@
         this.$.ajax.url = 'http://localhost:3000/list';
         this.$.ajax.body = JSON.stringify(this.formValues);
         this.$.ajax.generateRequest();
-
       },
       // Deleting the item using the ID
       _deleteMeal: function(e) {
@@ -119,6 +118,11 @@
         this.$.ajax.params = {date: this.formValues.date};
         this.$.ajax.generateRequest();
       },
+
+        // _drawFreshList: function() {
+        //     this._listMeals()
+        // },
+
     });
   </script>
 </dom-module>
