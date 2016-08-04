@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify, request
 from flask_mysqldb import MySQL
 from sqlquery import *
+import os
 
 @app.route("/")
 def index():
@@ -22,5 +23,6 @@ def del_food():
   return foods()
 
 
-# if __name__ == "__main__":
-#   app.run(debug=True, host='localhost', port=3000)
+if __name__ == "__main__":
+  port = int(os.environ.get("PORT", 3000))
+  app.run(debug=True, host='localhost', port=port)
