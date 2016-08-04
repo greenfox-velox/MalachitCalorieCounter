@@ -36,7 +36,12 @@
     properties: {
       fullName: String,
       currentEmail: String,
-      userImg: String
+      userImg: String,
+      greetingHello: {
+        type: String,
+        notify: true,
+        value: 'Hello',
+      },
     }
 
   });

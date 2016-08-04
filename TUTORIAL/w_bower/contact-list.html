@@ -12,6 +12,8 @@
   </style>
   
   <template>
+  <h1>{{greeting}}</h1>
+  <contact-listing greeting-hello={{greeting}}></contact-listing>
     <ul>
       <template is="dom-repeat" items="{{contacts}}">
         <li>
@@ -26,6 +28,8 @@
 <script>
   Polymer({
     is: 'contact-list',
+    properties: {
+    },
     
     ready: function() {
       this.contacts = [
