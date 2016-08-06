@@ -5,21 +5,24 @@
 <link rel="import" href="bower_components/paper-button/paper-button.html">
 <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="./input-form.html">
+<link rel="import" href="./filter-dropdown.html">
 
 <dom-module id="meal-list">
 
   <template>
     <iron-ajax
       id="ajax"
+      auto
       content-type="application/json"
-      url=""
-      method=""
-      last-response="{{currentList}}"
+      url='http://localhost:3001/list'
+      method="GET"
+      last-response="{{dropDownList}}"
       body=""
       params="">
     </iron-ajax>
 
     <input-form form-values={{formValues}}></input-form>
+    <filter-dropdown mealsbydate={{dropDownList}}></filter-dropdown>
 
     <div class="buttons">
       <paper-button raised on-tap="_addMeal" class="addButton">Add new meal</paper-button>
@@ -84,39 +87,45 @@
       properties: {
         formValues: Object,
 
-        currentList: {
-          type: Array,
-        }
+        dropDownList: Array,
+
+        currentList: Array,
       },
+      url: 'http://localhost:3001/list',
 
       //Listing the whole list of meals by clicking on list button
       _listMeals: function() {
+        if (this.currentList === undefined) {
+          this.currentList = this.dropDownList;
+          return
+        }
         this.$.ajax.method = 'GET';
-        this.$.ajax.url = 'http://localhost:3000/list';
-        this.$.ajax.generateRequest();
+        this.$.ajax.url = this.url;
+        this.currentList = this.dropDownList;
       },
 
-      // Adding a new test meal by clicking on add button
+      // Adding a new meal by clicking on add button
       _addMeal: function() {
         this.$.ajax.method = 'POST';
-        this.$.ajax.url = 'http://localhost:3000/list';
+        this.$.ajax.url = this.url;
         this.$.ajax.body = JSON.stringify(this.formValues);
-        this.$.ajax.generateRequest();
+        this.currentList = this.dropDownList;
+        // this.$.ajax.generateRequest();
       },
       // Deleting the item using the ID
       _deleteMeal: function(e) {
         this.splice('currentList', e.model.index, 1);
         this.$.ajax.method = 'DELETE';
-        this.$.ajax.url = 'http://localhost:3000/list';
+        this.$.ajax.url = this.url;
         this.$.ajax.body = JSON.stringify({id: e.target.parentElement.parentElement.getAttribute('data-id')});
-        this.$.ajax.generateRequest();
+        // this.$.ajax.generateRequest();
       },
 
       _filter: function() {
         this.$.ajax.method = 'GET';
         this.$.ajax.url = 'http://localhost:3000/filter';
         this.$.ajax.params = {date: this.formValues.date};
-        this.$.ajax.generateRequest();
+        // this.$.ajax.generateRequest();
       },
 
         // _drawFreshList: function() {

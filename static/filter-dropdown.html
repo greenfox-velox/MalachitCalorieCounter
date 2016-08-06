@@ -1,0 +1,43 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/paper-item/paper-item.html">
+<link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="filter-dropdown">
+  <template>
+    <style>
+      paper-dropdown-menu {
+        margin: 10px auto;
+        width: 50%;
+    }
+    </style>
+
+      <paper-dropdown-menu label="Dinosaurs">
+        <paper-listbox class="dropdown-content">
+          <!-- <iron-ajax
+            auto
+            id="ajax"
+            content-type='application/json'
+            url='http://localhost:3001/list'
+            method='GET'
+            last-response="{{mealsbydate}}">
+          </iron-ajax> -->
+          <template is="dom-repeat" items=[[mealsbydate]]>
+            <paper-item>{{item.date}}</paper-item>
+          </template>
+        </paper-listbox>
+      </paper-dropdown-menu>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: "filter-dropdown",
+
+      properties : {
+        mealsbydate: Array,
+      }
+    });
+  </script>
+</dom-module>
